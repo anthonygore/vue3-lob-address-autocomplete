@@ -3,44 +3,55 @@
     <h3>Vue 3 Autocomplete Form</h3>
     <div class="fields">
       <div class="field">
-        <label for="address1">Address 1</label>
+        <label for="address">Address</label>
         <Autocomplete
-            id="address1"
+            id="address"
             :results="suggestions"
             @input="getSuggestions"
             @onSelect="selected"
             :debounce="1000"
-            ref="address1"
+            ref="address"
         />
       </div>
-      <FormInput id="address2" label="Address 2" v-model="address2" />
-      <FormInput id="city" label="City" v-model="city" />
-      <FormInput id="state" label="State" v-model="state" />
-      <FormInput id="zip" label="Zip" v-model="zip" />
+      <div class="field">
+        <label for="city">City</label>
+        <div>
+          <input type="text" name="city" id="city" v-model="city" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="state">State</label>
+        <div>
+          <input type="text" name="state" id="state" v-model="state" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="zip">Zip</label>
+        <div>
+          <input type="text" id="zip" name="city" v-model="zip" />
+        </div>
+      </div>
     </div>
-    <input id="submit-button" class="submit" type="submit" value="Submit" />
+    <input id="submit" class="submit" type="submit" value="Submit" />
   </form>
 </template>
 
 <script>
-import FormInput from "./components/FormInput.vue"
 import { ref } from "vue";
 import Autocomplete from 'vue3-autocomplete'
 import useAutocomplete from "./useAutocomplete";
 export default {
   name: "App",
   components: {
-    FormInput,
     Autocomplete
   },
   setup () {
-    const address1 = ref()
-    const address2 = ref()
+    const address = ref()
     const city = ref()
     const state = ref()
     const zip = ref()
     function selected(suggestion) {
-      address1.value.setText(suggestion.data.primary_line)
+      address.value.setText(suggestion.data.primary_line)
       city.value = suggestion.data.city
       state.value = suggestion.data.state
       zip.value = suggestion.data.zip_code
@@ -48,8 +59,7 @@ export default {
     }
     const { suggestions, getSuggestions } = useAutocomplete()
     return {
-      address1,
-      address2,
+      address,
       city,
       state,
       zip,
@@ -62,7 +72,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -121,6 +130,7 @@ input {
   padding: 5px 10px;
   min-width: 200px;
   border-radius: 3px;
+  border-width: 0;
 }
 
 .vue3-autocomplete-container {

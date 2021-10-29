@@ -3,7 +3,6 @@ import {ref} from "vue";
 export default function () {
   const suggestions = ref([])
   async function getSuggestions() {
-    console.log(import.meta.env)
     const config = {
       method: 'POST',
       body: JSON.stringify({
