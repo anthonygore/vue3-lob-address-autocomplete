@@ -1,7 +1,11 @@
-# Vue 3 + Vite
+# vue3-lob-address-autocomplete
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Address autocomplete using Lob Address Autocompletion
 
-## Recommended IDE Setup
+Get a Lob public API key and set Set VITE_LOB_API_KEY= in .env
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+```
+cp .env.example .env
+
+npm run dev
+```

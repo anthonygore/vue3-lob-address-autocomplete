@@ -3,6 +3,7 @@ import {ref} from "vue";
 export default function () {
   const suggestions = ref([])
   async function getSuggestions() {
+    console.log(import.meta.env)
     const config = {
       method: 'POST',
       body: JSON.stringify({
@@ -10,7 +11,7 @@ export default function () {
       }),
       headers: new Headers({
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa('test_pub_9a5604627e4b263421579519c905160:')
+        'Authorization': 'Basic ' + btoa(`${import.meta.env.VITE_LOB_API_KEY}:`)
       })
     }
     try {
