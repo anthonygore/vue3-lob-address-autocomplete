@@ -7,7 +7,7 @@
         <Autocomplete
             id="address"
             :results="suggestions"
-            @input="getSuggestions"
+            @input="onAddressInput"
             @onSelect="selected"
             :debounce="1000"
             ref="address"
@@ -39,7 +39,7 @@
 <script>
 import { ref } from "vue";
 import Autocomplete from 'vue3-autocomplete'
-import useAutocomplete from "./useAutocomplete";
+import useAddressSuggestions from "./useAddressSuggestions";
 export default {
   name: "App",
   components: {
@@ -50,6 +50,7 @@ export default {
     const city = ref()
     const state = ref()
     const zip = ref()
+    const suggestions = ref([])
     function selected(suggestion) {
       address.value.setText(suggestion.data.primary_line)
       city.value = suggestion.data.city
@@ -57,13 +58,17 @@ export default {
       zip.value = suggestion.data.zip_code
       suggestions.value = []
     }
-    const { suggestions, getSuggestions } = useAutocomplete()
+    const { getSuggestions } = useAddressSuggestions()
+    async function onAddressInput (val) {
+      suggestions.value = await getSuggestions(val)
+    }
     return {
       address,
       city,
       state,
       zip,
       selected,
+      onAddressInput,
       suggestions,
       getSuggestions
     }
